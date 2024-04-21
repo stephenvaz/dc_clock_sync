@@ -49,7 +49,6 @@ def closeConnections(sig, frame):
     receive_time.exit()
     exit(0)
 
-# threading.Thread(target=clockHandler)
 master = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 signal.signal(signal.SIGINT, closeConnections)
