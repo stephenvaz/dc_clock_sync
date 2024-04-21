@@ -1,4 +1,4 @@
-HOST='127.0.0.1'
+HOST=''
 PORT=3000
 
 FORMAT='utf-8'
