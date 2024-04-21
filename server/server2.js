@@ -28,7 +28,7 @@ server.listen(PORT, err => {
         console.log("Error: ", err)
         throw err
     };
-    console.clear();
+    // console.clear();
     console.log(`Server @ http://localhost:${PORT}`);
 });
 
