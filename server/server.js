@@ -18,7 +18,19 @@ server.handle((message, response) => {
 
     // Respond to the client
     message.txTimestamp = Math.floor(Date.now() / 1000);
-    response(message);
+    
+    const addDelay = process.argv.includes('--delay');
+
+    if (addDelay) {
+        // Add a random delay of 1 to 5 seconds before sending the response
+        const delayInSeconds = Math.floor(Math.random() * 5) + 1;
+        setTimeout(() => {
+            response(message);
+        }, delayInSeconds * 1000);
+        console.log(`Delayed response will be sent after ${delayInSeconds} seconds.`);
+    } else {
+        response(message);
+    }
 });
 
 const PORT = process.env.PORT || 1234;
