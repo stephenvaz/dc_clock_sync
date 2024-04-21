@@ -11,12 +11,13 @@ def closeConnection(sig, frame):
     slave.send(b'-1')
     slave.close()
 
-slave = socket.socket()
+slave = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 signal.signal(signal.SIGINT, closeConnection)
-
+print(f"Client @ {HOST}:{PORT}")
 slave.connect((HOST, PORT))
 
+print("Initial Time", datetime.datetime.now())
 while True:
     payload = slave.recv(BUFFERSIZE).decode(FORMAT)
     messageType = payload[0]
@@ -27,5 +28,4 @@ while True:
         slave.send(str(int(difference)).encode(FORMAT))
     elif(messageType == '1'):
         CORRECTION += int(message)
-        print("Correction", CORRECTION)
         print(f"New Time {datetime.datetime.now() + datetime.timedelta(seconds=CORRECTION)}")
