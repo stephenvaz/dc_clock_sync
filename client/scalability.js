@@ -1,11 +1,9 @@
-// scalability.js
-
 const NTP = require('ntp-time').Client;
 
 const ServerIP = process.env.NTP_IP || 'localhost';
 const PORT = process.env.PORT || 1234;
 
-// Function to create and synchronize multiple clients
+// Create and synchronize multiple clients
 async function synchronizeClients(numClients) {
     const clients = [];
 
