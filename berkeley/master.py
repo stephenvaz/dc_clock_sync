@@ -30,10 +30,12 @@ def receiveTime():
             for addr in addresses:
                 currentClients[addr][DIFFERENCE] = int(currentClients[addr][SOCKET].recv(BUFFERSIZE).decode(FORMAT))
             averageDifference = int(sum([currentClients[addr][DIFFERENCE] for addr in currentClients]) / len(currentClients))
+            print(f"Average Delta - {averageDifference}")
             for addr in addresses:
                 currentClients[addr][SOCKET].send(b'1'+str(averageDifference-currentClients[addr][DIFFERENCE]).encode(FORMAT))
                 CORRECTION += averageDifference
-            print(f"Server: Corrected Time - {datetime.datetime.now()+datetime.timedelta(seconds=CORRECTION)}")
+            
+            print(f"Updated Time - {datetime.datetime.now()+datetime.timedelta(seconds=CORRECTION)}")
 
 def closeConnection(addr):
     CLIENTS[addr][SOCKET].close()
@@ -55,7 +57,7 @@ signal.signal(signal.SIGINT, closeConnections)
 master.bind((HOST, PORT))
 
 master.listen(5)
-print(f"Server listening at {PORT}")
+print(f"Server @ localhost:{PORT}")
 
 accept_connections = threading.Thread(target=acceptConnections)
 send_time = threading.Thread(target=sendTime)

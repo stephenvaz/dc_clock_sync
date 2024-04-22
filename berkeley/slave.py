@@ -27,4 +27,5 @@ while True:
         slave.send(str(int(difference)).encode(FORMAT))
     elif(messageType == '1'):
         CORRECTION += int(message)
-        print(f"Client: Corrected Time {datetime.datetime.now() + datetime.timedelta(seconds=CORRECTION)}")
+        print("Correction", CORRECTION)
+        print(f"New Time {datetime.datetime.now() + datetime.timedelta(seconds=CORRECTION)}")
