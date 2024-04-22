@@ -58,6 +58,7 @@ master.bind((HOST, PORT))
 
 master.listen(5)
 print(f"Server @ localhost:{PORT}")
+print("Initial Time", datetime.datetime.now())
 
 accept_connections = threading.Thread(target=acceptConnections)
 send_time = threading.Thread(target=sendTime)
